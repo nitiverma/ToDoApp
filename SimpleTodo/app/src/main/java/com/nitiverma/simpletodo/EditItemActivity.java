@@ -19,7 +19,7 @@ public class EditItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_item);
         String inputString = getOriginalItemString();
         EditText eiEditText = (EditText)findViewById(R.id.eiEditText);
-        eiEditText.setText(inputString);
+        eiEditText.setHint(inputString);
     }
 
     public void onSaveItem(View v){

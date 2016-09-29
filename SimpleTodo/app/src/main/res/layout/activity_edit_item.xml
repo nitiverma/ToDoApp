@@ -13,35 +13,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:id="@+id/eitextView"
         android:contentDescription="Edit Item Text View"
-        android:text="Edit Item Here:" />
+        android:text="Edit Item Here:"
+        android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
     <Button
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="82dp"
         android:id="@+id/eiButton"
         android:onClick="onSaveItem"
         android:layout_below="@+id/eiEditText"
-        android:layout_alignLeft="@+id/eitextView"
-        android:layout_alignStart="@+id/eitextView" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Edit item here:"
         android:ems="10"
         android:id="@+id/eiEditText"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="124dp"
+        android:hint="Edit item here:"
         android:layout_below="@+id/eitextView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="46dp"
-        android:layout_marginEnd="46dp" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
