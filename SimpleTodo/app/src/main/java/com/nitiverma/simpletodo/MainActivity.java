@@ -1,5 +1,6 @@
 package com.nitiverma.simpletodo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 import java.io.File;
@@ -39,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupListViewListener(){
-        lvItems.setOnItemLongClickListener(
-                new OnItemLongClickListener(){
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
                     @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        items.remove(position);
-                        itemAdapter.notifyDataSetChanged();
-                        writeItems();
-                        return true;
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+                        i.putExtra("itemText", lvItems.getItemAtPosition(position).toString());
+                        i.putExtra("itemPosition", position);
+                        startActivityForResult(i, position);
                     }
                 }
         );
@@ -55,9 +57,24 @@ public class MainActivity extends AppCompatActivity {
     public void onAddItem(View v){
         EditText etNewItem = (EditText)findViewById(R.id.etEditText);
         String itemText = etNewItem.getText().toString();
+        if (itemText.isEmpty()) {
+            return;
+        }
         itemAdapter.add(itemText);
         etNewItem.setText("");
         writeItems();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            String itemValue = data.getExtras().getString("itemValue");
+            int position = data.getExtras().getInt("code", 0);
+            items.remove(position);
+            items.add(position, itemValue);
+            itemAdapter.notifyDataSetChanged();
+            writeItems();
+        }
     }
 
     private void readItems(){
