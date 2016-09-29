@@ -52,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        lvItems.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                items.remove(position);
+                itemAdapter.notifyDataSetChanged();
+                writeItems();
+                return true;
+            }
+        });
     }
 
     public void onAddItem(View v){
